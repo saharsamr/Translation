@@ -1,0 +1,66 @@
+save_data: /content/drive/MyDrive/data/run/example
+
+src_vocab: /content/drive/MyDrive/data/run/example.vocab.src
+tgt_vocab: /content/drive/MyDrive/data/run/example.vocab.tgt
+
+data:
+  train:
+    path_src: /content/drive/MyDrive/data/train.en
+    path_tgt: /content/drive/MyDrive/data/train.fa
+    transforms: [sentencepiece, filtertoolong]
+  valid:
+    path_src: /content/drive/MyDrive/data/valid.en
+    path_tgt: /content/drive/MyDrive/data/valid.fa
+    transforms: [sentencepiece, filtertoolong]
+
+src_subword_model: /content/drive/MyDrive/data/wmtenfa.model
+tgt_subword_model: /content/drive/MyDrive/data/wmtenfa.model
+src_subword_nbest: 3
+src_subword_alpha: 0.0
+tgt_subword_nbest: 3
+tgt_subword_alpha: 0.0
+
+src_seq_length: 150
+tgt_seq_length: 150
+
+skip_empty_level: silent
+
+save_model: /content/drive/MyDrive/data/run/model
+save_checkpoint_steps: 1000
+#keep_checkpoint: 10
+seed: 3435
+train_steps: 15000
+valid_steps: 1000
+warmup_steps: 1000
+report_every: 100
+
+decoder_type: transformer
+encoder_type: transformer
+word_vec_size: 512
+rnn_size: 512
+layers: 6
+transformer_ff: 2048
+heads: 8
+
+accum_count: 4
+optim: adam
+adam_beta1: 0.9
+adam_beta2: 0.998
+decay_method: noam
+learning_rate: 1.0
+max_grad_norm: 0.0
+
+batch_size: 512
+batch_type: tokens
+normalization: tokens
+dropout: 0.2
+label_smoothing: 0.1
+
+max_generator_batches: 2
+
+param_init: 0.0
+param_init_glorot: 'true'
+position_encoding: 'true'
+
+world_size: 1
+gpu_ranks: [0]
